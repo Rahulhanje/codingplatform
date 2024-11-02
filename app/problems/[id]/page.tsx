@@ -1,5 +1,4 @@
 'use client';
-
 import { useParams } from 'next/navigation';
 import Playground from '@/app/components/playground/playground';
 import Split from 'react-split';
@@ -7,6 +6,7 @@ import ReactCodeMirror from '@uiw/react-codemirror';
 import { vscodeDark } from '@uiw/codemirror-theme-vscode';
 import problems from '@/app/data/EachProblems';
 import { useEffect, useState } from 'react';
+import { javascript } from '@codemirror/lang-javascript';
 
 const ProblemDetails = () => {
   const [language, setLanguage] = useState(1); // Default to C++
@@ -49,13 +49,17 @@ const ProblemDetails = () => {
 
       <Split className='flex flex-row' minSize={0}>
         <Playground problem={problem} />
-        <ReactCodeMirror
+        <div className='w-full overflow-auto'>
+          <ReactCodeMirror
           value={usersCode}
           theme={vscodeDark}
+          extensions={[javascript()]}
           height='500px'
           width='100%' // Adjusted width to 100% for better layout
         />
+        </div>
       </Split>
+      
     </div>
   );
 };
