@@ -1,12 +1,15 @@
-import addTwoNumbers from "./addTwoNum";
-import twoSum from "./twosum";
-import validParentheses from "./validParentheses";
+
+import { addTwoNumbersProblem } from "./addTwoNum";
+import { multiplyTwoNumbersProblem } from "./multifly";
+import { subtractTwoNumbersProblem } from "./substract";
+
+
 
 
 const problems = [
-    twoSum,
-    validParentheses,
-    addTwoNumbers,
+    addTwoNumbersProblem,
+    multiplyTwoNumbersProblem,
+    subtractTwoNumbersProblem,
 ];
 
 export default problems;

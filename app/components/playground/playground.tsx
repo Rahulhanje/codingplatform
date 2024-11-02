@@ -1,43 +1,48 @@
 import React from 'react';
+import { Problem } from '@/app/data/types/types';
 
-interface ProblemExample {
-    input: { [key: string]: any }; // Adjust based on your input structure
-    output: any;                   // Adjust based on your expected output type
-    explanation: string;
-}
-
-interface Problem {
-    title: string;
-    description: string;
-    examples: ProblemExample[];
-}
-
-interface PlaygroundProps {
+interface ProblemDisplayProps {
     problem: Problem;
 }
 
-const Playground: React.FC<PlaygroundProps> = ({ problem }) => {
+const ProblemDisplay: React.FC<ProblemDisplayProps> = ({ problem }) => {
     return (
-        <div className="h-screen overflow-scroll">
-            <h2>Problem Details</h2>
-            <p><strong>Name:</strong> {problem.title}</p>
-            <p><strong>Description:</strong> {problem.description}</p>
+        <div className="p-4">
+            <h2 className="text-2xl font-bold">{problem.title}</h2>
+            <p className="my-2"><strong>Problem Statement:</strong> {problem.problemStatement}</p>
 
-            <h3>Examples</h3>
-            {problem.examples.map((example, index) => (
-                <div key={index}>
-                    <h4>Example {index + 1}</h4>
-                    <p><strong>Input:</strong> {JSON.stringify(example.input)}</p>
-                    <p><strong>Output:</strong> {JSON.stringify(example.output)}</p>
-                    <p><strong>Explanation:</strong> {example.explanation}</p>
-                </div>
-            ))}
+            <h3 className="text-xl font-semibold">Examples</h3>
+            <div className="space-y-4">
+                {problem.examples.map((example) => (
+                    <div key={example.id} className="border p-4 rounded">
+                        <h4 className="font-medium">Example {example.id}</h4>
+                        <p><strong>Input:</strong> {example.inputText}</p>
+                        <p><strong>Output:</strong> {example.outputText}</p>
+                    </div>
+                ))}
+            </div>
 
-            <button onClick={() => alert(`Viewing solution for ${problem.title}`)}>
-                View Solution
-            </button>
+            <h3 className="text-xl font-semibold mt-4">Constraints</h3>
+            <p>{problem.constraints}</p>
+
+            <h3 className="text-xl font-semibold mt-4">Tags</h3>
+            <ul className="list-disc list-inside">
+                {problem.tag.map((tag) => (
+                    <li key={tag.id}>{tag.name}</li>
+                ))}
+            </ul>
+
+            <h3 className="text-xl font-semibold mt-4">Companies</h3>
+            <ul className="list-disc list-inside">
+                {problem.companies.map((company) => (
+                    <li key={company.id}>{company.name}</li>
+                ))}
+            </ul>
+
+            <p className="mt-4"><strong>Average Time:</strong> {problem.averagetime}</p>
+            <p className="mt-2"><strong>Difficulty:</strong> {problem.difficulty}</p>
         </div>
     );
-}
+};
 
-export default Playground;
+export default ProblemDisplay;

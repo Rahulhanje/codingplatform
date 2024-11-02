@@ -1,25 +1,44 @@
-// src/types.ts
+export type details = {
+	id: number;
+	name:string
+};
 
-export interface ProblemExample {
-    input: { [key: string]: any };
-    output: any;
-    explanation: string;
-}
+export type Example = {
+	id: number;
+	inputText: string;
+	outputText: string;
+	explanation?: string;
+	img?: string;
+};
 
-export interface Problem {
-    id: number;
-    title: string;
-    description: string;
-    input: {
-        type: string;
-        properties: { [key: string]: any };
-        required: string[];
-    };
-    output: {
-        type: string;
-        items?: { type: string };
-        description: string;
-    };
-    examples: ProblemExample[];
-    initialcode: string;
-}
+export type Problem = {
+	id: string;
+	order: number;
+	title: string;
+	problemStatement: string;
+	difficulty: string;
+	examples: Example[];
+	constraints: string;
+	starterCode: details[];
+	intialcode:details[],
+	endingcode:details[],
+	solutioncode:details[]
+	solutiondesc?:string
+	input:string
+	output:string
+	tag:details[]
+	companies:details[]
+	averagetime:string
+};
+
+export type DBProblem = {
+	id: string;
+	title: string;
+	category: string;
+	difficulty: string;
+	likes: number;
+	dislikes: number;
+	order: number;
+	videoId?: string;
+	link?: string;
+};
